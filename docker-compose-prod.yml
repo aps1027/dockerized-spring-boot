@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  spring-boot:
+    build:
+      context: ./spring-boot
+    container_name: spring-boot
+    working_dir: /app
+    ports:
+      - 3000:8080
+    depends_on:
+      - dbpostgresql
+
+  dbpostgresql:
+    container_name: dbpostgresql
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_DB=testdb
+    ports:
+      - 5432:5432
